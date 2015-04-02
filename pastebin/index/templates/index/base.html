@@ -1,0 +1,33 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pastebin</title>
+    <link rel="stylesheet" type="text/css" href="{% static "css/normalize.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "css/foundation.min.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "css/pastebin.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "css/codemirror.css" %}">
+
+    <script type="text/javascript" src="{% static "js/vendor/modernizr.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/vendor/jquery.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/vendor/jquery.cookie.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/vendor/fastclick.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/vendor/placeholder.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/foundation.min.js" %}"></script>
+
+    <script type="text/javascript" src="{% static "js/codemirror.min.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/codemirror-modes.min.js" %}"></script>
+</head>
+<body>
+    <header>
+        {% include "index/nav.html" %}
+    </header>
+
+    <div class="row">
+        <div class="large-12 columns">
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+</body>
+</html>

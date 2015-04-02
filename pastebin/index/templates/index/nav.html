@@ -1,0 +1,34 @@
+{% load active_tag %}
+
+<!-- start nav -->
+<nav class="top-bar" data-topbar role="navigation">
+  <!-- start title section -->
+  <ul class="title-area">
+    <li class="name">
+      <h1><a href="#">django-pastebin</a></h1>
+    </li>
+    <li class="toggle-topbar menu-icon"><a href="#"></a></li>
+  </ul>
+  <!-- end title section -->
+
+  <section class="top-bar-section">
+    <!-- start left menu section -->
+    <ul class="left">
+      <li class="{% add_active request 'pastes' %}"><a href="{% url "pastes" %}">your pastes</a></li>
+      <li><a href="#" class="{% add_active request 'new_paste' %}">new paste</a></li>
+    </ul>
+    <!-- end left menu section -->
+
+    <!-- start right menu section -->
+    <ul class="right">
+      {% if not user.is_authenticated %}
+        <li class="{% add_active request 'login' %}"><a href="{% url "login" %}">login</a></li>
+      {% else %}
+        <li><a href="#" class="{% add_active request 'account' %}">logged as {{ user.username }}</a></li>
+        <li><a href="{% url "logout" %}">logout</a></li>
+      {% endif %}
+    </ul>
+    <!-- end right menu section -->
+  </section>
+</nav>
+<!-- end nav -->

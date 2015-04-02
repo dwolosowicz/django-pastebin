@@ -1,0 +1,28 @@
+header {
+    margin-bottom: 3%;
+}
+
+.table-button {
+    font-size: 0.8em;
+    background: #2ba6cb;
+    transition: background-color 300ms ease-out 0s;
+    padding: 15px;
+}
+
+.table-button a {
+    color: #FFF;
+    width: inherit;
+    height: inherit;
+}
+
+.table-button.alert {
+    background: #F04124;
+}
+
+.table-button.alert:hover {
+    background: #CF2A0E;
+}
+
+.table-button:hover {
+    background: #008CBA;
+}

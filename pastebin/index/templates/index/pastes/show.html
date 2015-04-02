@@ -1,0 +1,22 @@
+{% extends "index/base.html" %}
+
+{% load humanize %}
+{% load paste_author %}
+
+{% block content %}
+
+    <h1>{{ paste.title }} <small>added {{ paste.created|naturaltime }}</small></h1>
+    
+    <textarea id="code" class="cm-s-default" data-syntax="{{ paste.syntax.string_id }}">{{ paste.content }}</textarea>
+
+    <script type="text/javascript">
+    var codeNode = document.querySelector('#code');
+    var syntax = codeNode.getAttribute('data-syntax');
+
+    CodeMirror.fromTextArea(codeNode, {
+        mode: syntax,
+        lineNumbers: true,
+        readOnly: true
+    });
+    </script>
+{% endblock %}

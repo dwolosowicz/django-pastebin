@@ -1,0 +1,21 @@
+{% extends "index/base.html" %}
+
+{% load humanize %}
+
+{% block content %}
+    <table>
+        {% for paste in pastes_list %}
+            <tr>
+                <td><a href="{% url "paste" hash=paste.hash %}">{{ paste.title }}</a></td>
+                <td>{{ paste.syntax.name }}</td>
+                <td>added {{ paste.created | naturaltime }}</td>
+                <td class="table-button">
+                    <a href="#">edit</a>
+                </td>
+                <td class="table-button alert">
+                    <a href="#">remove</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

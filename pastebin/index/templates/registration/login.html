@@ -1,0 +1,37 @@
+{% extends "index/base.html" %}
+
+{% block content %}
+    <!-- start login form -->
+    <form method="post" action="{% url 'django.contrib.auth.views.login' %}">
+        {% csrf_token %}
+        
+        <input type="hidden" name="next" value="{{ next }}" />
+
+        <!-- start username -->
+        <div class="row">
+            <div class="large-offset-3 large-6 columns">
+                {{ form.username.label_tag }}
+                {{ form.username }}            
+            </div>
+        </div>
+        <!-- end username -->
+
+        <!-- start password -->
+        <div class="row">
+            <div class="large-offset-3 large-6 columns">
+                {{ form.password.label_tag }}
+                {{ form.password }}
+            </div>
+        </div>
+        <!-- end password -->
+
+        <!-- start login button -->
+        <div class="row">
+            <div class="large-offset-7 large-2 columns">
+                <input type="submit" value="login" class="button expand" />
+            </div>
+        </div>
+        <!-- end login button -->
+    </form>
+    <!-- end login form -->
+{% endblock %}
