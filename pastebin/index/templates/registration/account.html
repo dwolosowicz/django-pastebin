@@ -1,0 +1,9 @@
+{% extends "index/base.html" %}
+
+{% block content %}
+    <h1>Hi {% if user.first_name and user.last_name %}{{ user.first_name }} {{ user.last_name }}{% else %}{{ user.username }}{% endif %}</h1>
+
+    <p>Soo... you've got two options. Here. You can <a href="{% url 'password_change' %}">change the password</a>, or <del>delete your account</del>.</p>
+    <p>But don't do the last.</p>
+    <p><strong>Really.</strong> Don't.</p>
+{% endblock %}

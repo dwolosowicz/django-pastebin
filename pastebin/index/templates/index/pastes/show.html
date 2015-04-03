@@ -4,10 +4,20 @@
 {% load paste_author %}
 
 {% block content %}
+    <div class="row">
+        <div class="small-12 large-9 columns">
+            <h1>{{ paste.title }}</h1>
+            <h3 class="subheader">added {{ paste.created|naturaltime }}</h3>
+            
+            <div class="vertical-spacer-30"></div>
 
-    <h1>{{ paste.title }} <small>added {{ paste.created|naturaltime }}</small></h1>
-    
-    <textarea id="code" class="cm-s-default" data-syntax="{{ paste.syntax.string_id }}">{{ paste.content }}</textarea>
+            <textarea id="code" class="cm-s-default" data-syntax="{{ paste.syntax.string_id }}">{{ paste.content }}</textarea>
+        </div>
+        <div class="small-12 large-3 columns">
+            {% include 'index/pastes/partials/_list.html' with short=True %}
+        </div>
+    </div>
+
 
     <script type="text/javascript">
     var codeNode = document.querySelector('#code');

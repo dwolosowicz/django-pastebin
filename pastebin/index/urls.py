@@ -1,8 +1,11 @@
-from django.conf.urls import patterns, include, url
-from index.views import ListView, DetailView
+from django.conf.urls import url
+from index.views import *
 
 urlpatterns = [
-    url(r'^paste/(?P<hash>[a-z0-9]+)/$', DetailView.as_view(), name='paste'),
-    url(r'^accounts/profile/$', 'index.views.account_profile', name='account'),
-    url(r'^', ListView.as_view(), name='pastes'),
+    url(r'^paste/new/$', CreatePasteView.as_view(), name="paste_new"),
+    url(r'^paste/(?P<hash>[a-z0-9]+)/$', PasteView.as_view(), name='paste'),
+    url(r'^paste/(?P<hash>[a-z0-9]+)/edit$', UpdatePasteView.as_view(), name="paste_edit"),
+    url(r'^paste/(?P<hash>[a-z0-9]+)/delete$', DeletePasteView.as_view(), name="paste_delete"),
+    url(r'^accounts/profile/$', AccountProfileView.as_view(), name='account'),
+    url(r'^', PasteListView.as_view(), name='pastes'),
 ]

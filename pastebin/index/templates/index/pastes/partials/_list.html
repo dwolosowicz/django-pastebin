@@ -1,0 +1,25 @@
+{% load humanize %}
+{% load expired_tag %}
+
+<table>
+    {% for paste in paste_list %}
+        <tr>
+            <td><a href="{% url "paste" hash=paste.hash %}">{{ paste.title }}</a></td>
+            <td>{{ paste.syntax.name }}</td>
+
+            {% if not short %}
+                <td>added {{ paste.created | naturaltime }}</td>
+
+                <td>{% expired paste %}</td>
+
+                <td class="table-button">
+                    <a href="{% url 'paste_edit' paste.hash %}">edit</a>
+                </td>
+                
+                <td class="table-button alert">
+                    <a href="{% url 'paste_delete' paste.hash %}">remove</a>
+                </td>
+            {% endif %}
+        </tr>
+    {% endfor %}
+</table>

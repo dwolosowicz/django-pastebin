@@ -26,3 +26,8 @@ header {
 .table-button:hover {
     background: #008CBA;
 }
+
+.vertical-spacer-30 {
+    height: 30px;
+    width: 100%;
+}
