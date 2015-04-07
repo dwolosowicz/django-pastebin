@@ -3,17 +3,28 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.core.urlresolvers import reverse_lazy
 from django.views import generic
+from django.http import Http404
 
 from pastebin.models import Paste, Syntax
 from .forms import PasteForm
 
 
 class LoginRequiredMixin(object):
-    "Mixing serves as a class view version of login_required decorator"
+    "Mixin serves as a class view version of login_required decorator"
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         return super(LoginRequiredMixin, self).dispatch(*args, **kwargs)
+
+
+class PasteAuthenticationMixin(object):
+    'Mixin serves as a protection based on paste visibility'
+
+    def get_object(self):
+        o = super(PasteAuthenticationMixin, self).get_object()
+
+        if o.visible_to(Paste.ONLY_SPECIFIED_USERS) and not o.is_allowed(self.request.user):
+            raise Http404("Paste doesn't exist")
 
 
 class AccountProfileView(LoginRequiredMixin, generic.View):
@@ -21,6 +32,7 @@ class AccountProfileView(LoginRequiredMixin, generic.View):
 
     def get(self, request):
         return render(request, self.template_name)
+
 
 class PasteListView(LoginRequiredMixin, generic.ListView):
     template_name = 'index/pastes/list.html'
@@ -78,7 +90,7 @@ class DeletePasteView(LoginRequiredMixin, generic.DeleteView):
         return get_object_or_404(Paste, hash=paste_hash, author=author)
 
 
-class PasteView(LoginRequiredMixin, generic.DetailView):
+class PasteView(PasteAuthenticationMixin, LoginRequiredMixin, generic.DetailView):
     model = Paste
     template_name = 'index/pastes/show.html'
 

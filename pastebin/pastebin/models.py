@@ -77,7 +77,7 @@ class Paste(models.Model):
 
     author = models.ForeignKey(User)
     syntax = models.ForeignKey(Syntax)
-    users = models.ManyToManyField(User, related_name='users')
+    users = models.ManyToManyField(User, related_name='users', blank=True, null=True)
 
     visibility = models.CharField(choices=VISIBILITY, default=EVERYONE_WITH_LINK, max_length=12)
     expires_in = models.PositiveIntegerField(choices=EXPIRATIONS, default=INFINITE)
@@ -93,6 +93,15 @@ class Paste(models.Model):
 
     def expired(self):
         return timezone.now() > self.expires()
+
+    def visible_to(self, visibility):
+        return self.visibility == visibility
+
+    def is_allowed(self, user):
+        if user == self.author:
+            return True
+
+        return user in self.users
 
     def save(self, *args, **kwargs):
         """

@@ -1,0 +1,78 @@
+[{
+    "fields": {
+        "string_id": "text/javascript",
+        "name": "Javascript"
+    },
+    "model": "pastebin.syntax",
+    "pk": 1
+}, {
+    "fields": {
+        "string_id": "text/x-csrc",
+        "name": "C"
+    },
+    "model": "pastebin.syntax",
+    "pk": 2
+}, {
+    "fields": {
+        "string_id": "text/x-c++src",
+        "name": "C++"
+    },
+    "model": "pastebin.syntax",
+    "pk": 3
+}, {
+    "fields": {
+        "string_id": "text/python",
+        "name": "Python"
+    },
+    "model": "pastebin.syntax",
+    "pk": 4
+}, {
+    "fields": {
+        "string_id": "text/x-csharp",
+        "name": "C#"
+    },
+    "model": "pastebin.syntax",
+    "pk": 5
+}, {
+    "fields": {
+        "string_id": "text/x-objectivec",
+        "name": "Objective-C"
+    },
+    "model": "pastebin.syntax",
+    "pk": 6
+}, {
+    "fields": {
+        "string_id": "text/x-scala",
+        "name": "Scala"
+    },
+    "model": "pastebin.syntax",
+    "pk": 7
+}, {
+    "fields": {
+        "string_id": "text/x-java",
+        "name": "Java"
+    },
+    "model": "pastebin.syntax",
+    "pk": 8
+}, {
+    "fields": {
+        "string_id": "text/html",
+        "name": "HTML"
+    },
+    "model": "pastebin.syntax",
+    "pk": 9
+}, {
+    "fields": {
+        "string_id": "text/css",
+        "name": "CSS"
+    },
+    "model": "pastebin.syntax",
+    "pk": 10
+}, {
+    "fields": {
+        "string_id": "text",
+        "name": "Text"
+    },
+    "model": "pastebin.syntax",
+    "pk": 11
+}]
