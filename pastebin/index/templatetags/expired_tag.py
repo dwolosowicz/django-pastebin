@@ -16,10 +16,10 @@ def _expired_text(paste):
 def expired(paste):
     """ Returns the right form for expired field in pastes
 
-    Keyword aruguments:
+    Keyword arguments:
         paste -- Paste object
     """
     text = _expired_text(paste)
     humanized_time = naturaltime(paste.expires())
 
-    return "{} {}".format(text, humanized_time.encode('utf-8'))
+    return "{} {}".format(text, humanized_time.encode('UTF-8'))

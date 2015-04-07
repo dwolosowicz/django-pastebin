@@ -1,10 +1,10 @@
-from django.test import TestCase
-from django.contrib.auth.models import User
-
-from pastebin.models import Syntax, Paste
-from pastebin.jobs.minutely import remove_old_pastes 
-
 import random, string, datetime
+
+from django.contrib.auth.models import User
+from django.test import TestCase
+
+from pastebin.jobs.minutely import remove_old_pastes  # @UnresolvedImport
+from pastebin.models import Syntax, Paste  # @UnresolvedImport
 
 
 def _create_random_string():
@@ -35,8 +35,9 @@ def _create_random_paste(user, syntax, date=datetime.datetime.now(), expires_in=
 
 
 def _run_job(obj):
-   instance = obj() 
-   instance.execute()
+    instance = obj()
+    instance.execute()
+
 
 class RemoveOldPastesJobTestCase(TestCase):
     def setUp(self):
@@ -44,8 +45,8 @@ class RemoveOldPastesJobTestCase(TestCase):
         self.syntax = _create_syntax('text')
 
     def test_deletes_expired_pastes(self):
-        paste_to_delete = _create_random_paste(self.user, self.syntax, date=datetime.datetime.now() - datetime.timedelta(minutes=360))
-        paste_to_omit = _create_random_paste(self.user, self.syntax, date=datetime.datetime.now() + datetime.timedelta(minutes=360))
+        _create_random_paste(self.user, self.syntax, date=datetime.datetime.now() - datetime.timedelta(minutes=360))
+        _create_random_paste(self.user, self.syntax, date=datetime.datetime.now() + datetime.timedelta(minutes=360))
 
         self.assertEqual(2, Paste.objects.all().count())
 

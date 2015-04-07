@@ -1,12 +1,13 @@
-from django.db import models
-from django.utils import timezone
-from django.contrib.auth.models import User
-from django_extensions.db import fields
-from .utils import create_paste_hash
-from model_utils.managers import PassThroughManager
-
 import datetime
 import json
+
+from django.contrib.auth.models import User
+from django.db import models
+from django.utils import timezone
+from django_extensions.db import fields
+from model_utils.managers import PassThroughManager
+
+from .utils import create_paste_hash
 
 
 class SyntaxManager(models.Manager):

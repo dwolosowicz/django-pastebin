@@ -12,14 +12,14 @@ def _hash(text):
 
 def create_paste_hash(obj, title):
     """
-    Calculates hash of a title, or random string if the title is not present.
+    Calculates hash_string of a title, or random string if the title is not present.
     It generates hashes as long as one is not unique.
     """
     text = title or _create_random_string()
 
-    hash = _hash(text)
+    hash_string = _hash(text)
 
-    while obj.objects.filter(hash=hash).count() > 0:
-        hash = _hash(_create_random_string())
+    while obj.objects.filter(hash=hash_string).count() > 0:
+        hash_string = _hash(_create_random_string())
 
-    return hash
+    return hash_string

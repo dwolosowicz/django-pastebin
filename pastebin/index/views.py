@@ -1,11 +1,12 @@
-from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from django.utils.decorators import method_decorator
 from django.core.urlresolvers import reverse_lazy
-from django.views import generic
 from django.http import Http404
+from django.shortcuts import render, get_object_or_404
+from django.utils.decorators import method_decorator
+from django.views import generic
 
-from pastebin.models import Paste, Syntax
+from pastebin.models import Paste, Syntax  # @UnresolvedImport
+
 from .forms import PasteForm
 
 
@@ -61,6 +62,14 @@ class CreatePasteView(LoginRequiredMixin, SyntaxesMixin, generic.CreateView):
         form.instance.author = self.request.user
         return super(CreatePasteView, self).form_valid(form)
 
+    def get_form_kwargs(self):
+        "Injecting the currently logged in user into paste form"
+        kwargs = generic.CreateView.get_form_kwargs(self)
+        
+        kwargs['user'] = self.request.user
+        
+        return kwargs
+
 
 class UpdatePasteView(LoginRequiredMixin, SyntaxesMixin, generic.UpdateView):
     form_class = PasteForm
@@ -74,6 +83,14 @@ class UpdatePasteView(LoginRequiredMixin, SyntaxesMixin, generic.UpdateView):
         author = self.request.user
 
         return get_object_or_404(Paste, hash=paste_hash, author=author)
+    
+    def get_form_kwargs(self):
+        "Injecting the currently logged in user into paste form"
+        kwargs = generic.UpdateView.get_form_kwargs(self)
+        
+        kwargs['user'] = self.request.user
+        
+        return kwargs
 
 
 class DeletePasteView(LoginRequiredMixin, generic.DeleteView):
